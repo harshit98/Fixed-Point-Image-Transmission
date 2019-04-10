@@ -285,24 +285,24 @@ int main() {
 	char code[1024];
 	int n=0;
    	do {
-		code[n]=(char)fgetc(fp1);
+		code[n] = (char)fgetc(fp1);
 		n++;
     } while(!feof(fp1));
 
 	int h[n];
     for(int i=0;i<n;i++){
-    	h[i]=code[i]+128;
+    	h[i] = code[i]+128;
 	}
     		
     vector<int> x;
 	for(int i=0; i<n; i++) {
-		int a=h[i];
-		int reva=x.size();
-		int t=0;
-		while(a||t<8){
+		int a = h[i];
+		int reva = x.size();
+		int t = 0;
+		while(a || t<8) {
 			x.push_back(a%2);
-			a=a/2;
-			t++;	
+			a = a/2;
+			t++;
 		}
 		reverse(x.begin()+reva,x.end());			
 	}
@@ -552,7 +552,7 @@ int main() {
 	decoding(y,xd,n*32);
 	//decoding(y,xd,n*8);
 
-	vector<int>v;
+	vector<int> v;
 	/* for(int i=0;i<n*8;i+=8){	
 		int u=0;
 		u+=xd[i]*pow(2,7);
@@ -603,19 +603,19 @@ int main() {
 	}
 
 	char q[n];
-	for(int i=0;i<n;i++){
-		q[i]=(char)(v[i]-128);	
+	for(int i=0; i<n; i++) {
+		q[i] = (char)(v[i]-128);
 	}
 	
 	FILE *fp5;
-	fp5=fopen("finalbaldman.bmp","wb");
+	fp5 = fopen("finalbaldman.bmp","wb");
 	
-	for(int i=0;i<n;i++) {
-		fputc(q[i],fp5);
+	for(int i=0; i<n; i++) {
+		fputc(q[i], fp5);
 	}
 	
 	fclose(fp1);
 	fclose(fp5);
+
 	return 0;
 }
-
