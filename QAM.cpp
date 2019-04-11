@@ -12,9 +12,9 @@ using namespace std;
 void modulate(vector<int> x){
 	ofstream fp1;
 	fp1.open("QAMDATA.txt");
-	
+
 	int n = x.size();
-	cout<<"X size:"<<n<<endl;
+	cout << "X size: " << n << endl;
 	
 	creal_T mod[n/6];
 	int k=0;
@@ -73,12 +73,49 @@ void modulate(vector<int> x){
 			mod[k].im = 7;
 		}
 
-		fp1 << mod[k].re << " " << mod[k].im << endl;	
-		k++;
+		// Writes QAMDATA.txt with zero noise assumption.
+		fp1 << mod[k].re << " " << mod[k].im << endl;
+ 		k++;
 	}
 
 	cout << "Num:" << k << endl;
 	fp1.close();
+}
+
+void create_noise_data() {
+	ifstream fp1;
+	fp1.open("QAMDATA.txt");
+
+	ifstream fp2;
+	fp2.open("gnoise.txt");
+
+	ofstream fp3;
+	fp3.open("QAMDATA_WITH_NOISE.txt");
+
+	vector<double> noise;
+	double num;
+
+	vector<int> qam;
+	int temp;
+
+	while (!fp1.eof()) {
+    	fp1 >> temp;
+    	qam.push_back(temp);
+	}
+
+	while (!fp2.eof()) {
+		fp2 >> num;
+		noise.push_back(num);
+	}
+
+	cout << "Noise size: " << noise.size() << endl;
+	cout << "QAM Data size: " << qam.size() << endl;
+
+	for (int i = 1; i < noise.size(); i += 2) {
+    	fp3 << qam[i-2]+noise[i-2] << " " << qam[i]+noise[i] << "\n";
+	}
+
+	fp3.close();
 }
 
 vector<int> demodulate(){
@@ -88,10 +125,10 @@ vector<int> demodulate(){
 	vector<int> dem;
 	int temp;
 
-	while(fp2>>temp){
+	while(fp2 >> temp) {
 		dem.push_back(temp);
 		//cout << temp << " ";
-		fp2>>temp;
+		fp2 >> temp;
 		dem.push_back(temp);
 		//cout << temp << endl;
 	}
@@ -239,7 +276,12 @@ int main() {
 	// creal_T mod[x.size()/6] = modulate(x);
 	// creal_T mod[2] = modulate(x);
 	// cout << mod[1] << endl << mod[2] << endl;
+
+	// Modulate creates QAMDATA.txt with zero noise.
 	modulate(x);
+
+	// To create QAMDATA_WITH_NOISE.txt
+	create_noise_data();
 	
 	vector<int> xd;
 	xd = demodulate();
