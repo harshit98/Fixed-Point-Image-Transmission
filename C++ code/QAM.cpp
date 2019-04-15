@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <thread>
+#include <chrono>
 #include <cmath>
 #include <fstream>
-#include <chrono>
-#include <thread>
 #include "tmwtypes.h"
 #include "stdlib.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -98,39 +99,37 @@ void create_noise_data() {
 	vector<int> qam;
 	int temp;
 
-	while (!fp1.eof()) {
-    	fp1 >> temp;
+	while (fp1 >> temp) {	
     	qam.push_back(temp);
 	}
 
-	while (!fp2.eof()) {
-		fp2 >> num;
+	while (fp2 >> num) {
 		noise.push_back(num);
 	}
 
 	cout << "Noise size: " << noise.size() << endl;
 	cout << "QAM Data size: " << qam.size() << endl;
-
-	for (int i = 1; i < noise.size(); i += 2) {
-    	fp3 << qam[i-2]+noise[i-2] << " " << qam[i]+noise[i] << "\n";
+	int i=0;
+	for (i = 0; i < noise.size(); i += 2) {
+    	fp3 << qam[i]+noise[i] << " " << qam[i+1]+noise[i+1] << "\n";	
 	}
-
+	// cout<<"Loop:" << i <<endl;
 	fp3.close();
 }
 
 vector<int> demodulate(){
 	ifstream fp2;
-	fp2.open("QAMDATA.txt");
+	fp2.open("QAMDATA_WITH_NOISE.txt");
 
 	vector<int> dem;
-	int temp;
+	float temp;
 
 	while(fp2 >> temp) {
-		dem.push_back(temp);
-		//cout << temp << " ";
+		dem.push_back(round(temp));
+		//cout << round(temp) << " ";
 		fp2 >> temp;
-		dem.push_back(temp);
-		//cout << temp << endl;
+		dem.push_back(round(temp));
+		//cout << round(temp) << endl;
 	}
 	cout << "Dem size:" << dem.size() << endl;
 	
@@ -311,7 +310,7 @@ int main() {
 	cout << "Done!" << endl;
 	
 	FILE *fp5;
-	fp5 = fopen("finalcameraman.bmp","wb");
+	fp5 = fopen("final.bmp","wb");
 	
 	for (int i=0; i<n; i++){
 		fputc(q[i],fp5);

@@ -14,7 +14,7 @@ int main() {
 	srand(2);
 	
 	// length of sequence.
-	int n = 1000;
+	int n = 1364*2;
 
 	double x1[n], x2[n], x3[n], x4[n], x5[n];
 	double y[n];
@@ -32,9 +32,12 @@ int main() {
 	// write file.
 	ofstream outfile("gnoise.txt");
 	
-	for (int i = 0; i < n; i++) {
+	int i=0;
+	for (i = 0; i < n; i++) {
 		outfile << y[i] << "\n";
 	}
+
+	cout << "Size of Gaussian Noise file: " << i << "\n";
 	
 	outfile.close();
 	
