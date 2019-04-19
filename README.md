@@ -1,6 +1,8 @@
-# Fixed-Point-Image-Transmission
+# Fixed Point Image Transmission
 
-Fixed point image transmission over wired channel 64-QAM using Zedboard. This was course project in 6th Semester of B.Tech during Design Lab II course.
+Fixed point image transmission using 64 QAM digital modulation technique over wired channel on Zedboard (SoC). 
+
+This was course project in 6th Semester of B.Tech during Design Lab II course.
 
 # Procedure
 
