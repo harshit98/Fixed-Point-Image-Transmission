@@ -28,6 +28,16 @@ This was course project in 6th Semester of B.Tech during Design Lab II course.
 
 - The `QAMDATA.txt` was tested on Zedboard. Noise was from wired channel already. Image reconstruction on Zedboard was successful.
 
+# System Design
+
+![System Design](assets/System-Design.png)
+
+# Project Video
+
+The project video link shows the project simulation in MATLAB.
+
+Video link: https://www.youtube.com/watch?v=xtboY8SEiPY
+
 # Status - Completed
 
 Both C++ code and MATLAB code are available and working.
