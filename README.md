@@ -2,7 +2,7 @@
 
 Fixed point image transmission using 64 QAM digital modulation technique over wired channel on Zedboard (SoC). 
 
-The concept of Fixed Point Detector is used to use less memory while processing. The floating values occupy more memory compared to integer values. So, this convert usually converts all the floating point values to integer values.
+The concept of Fixed Point Detector is used to use less memory while processing. The floating values occupy more memory compared to integer values. So, this usually converts all the floating point values to integer values.
 
 `pow(2, fixed_pt_bits)` is used to do the work. `fixed_pt_bits` can be upto 4 bits, 8 bits or 16 bits in C++.
 
