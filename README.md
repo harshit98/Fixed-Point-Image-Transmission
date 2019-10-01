@@ -44,4 +44,4 @@ Video link: https://www.youtube.com/watch?v=xtboY8SEiPY
 
 # Status - Completed
 
-Both C++ code and MATLAB code are available and working. In final implementation image was sent from one zedboard to another wirelessly.
+Both C++ code and MATLAB code are available and working.
